@@ -72,15 +72,17 @@ const Hero = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [cta, setCta] = useState({
     text: 'Add To Your Browser',
-    href: 'javascript:void(0);', // Placeholder
+    href: '#', // Placeholder
+    disabled: true,
   });
 
   useEffect(() => {
     const userAgent = navigator.userAgent;
+    // NOTE: Add real extension links here
     if (userAgent.indexOf("Firefox") > -1) {
-      setCta({ text: 'Add to Firefox', href: 'javascript:void(0);' }); // Replace with Firefox extension link
+      setCta({ text: 'Add to Firefox', href: '#', disabled: false });
     } else if (userAgent.indexOf("Chrome") > -1) {
-      setCta({ text: 'Add to Chrome', href: 'javascript:void(0);' }); // Replace with Chrome extension link
+      setCta({ text: 'Add to Chrome', href: '#', disabled: false });
     }
   }, []);
 
@@ -103,7 +105,12 @@ const Hero = () => {
             EasyLeaf adds a Beginner Mode to Overleaf — so you can build resumes and papers without breaking LaTeX.
           </p>
           <div className="mt-8 flex justify-center md:justify-start space-x-4">
-            <a href={cta.href} className="bg-primary text-white px-8 py-3 rounded-lg font-semibold text-lg hover:bg-primary/90 transition-colors shadow-glow-indigo">
+            <a
+              href={cta.href}
+              aria-disabled={cta.disabled}
+              className={`bg-primary text-white px-8 py-3 rounded-lg font-semibold text-lg hover:bg-primary/90 transition-colors shadow-glow-indigo ${cta.disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
+              onClick={(e) => cta.disabled && e.preventDefault()}
+            >
               {cta.text}
             </a>
             <a href="/#how-it-works" className="bg-transparent border-2 border-gray-600 text-white px-8 py-3 rounded-lg font-semibold text-lg hover:bg-gray-800 transition-colors">
@@ -231,10 +238,10 @@ const FinalCTA = () => (
                 Stop Fighting LaTeX. Start Writing.
             </h2>
             <div className="mt-8 flex justify-center space-x-4">
-                <a href="javascript:void(0);" className="bg-white text-primary px-8 py-3 rounded-lg font-semibold text-lg hover:bg-gray-200 transition-colors">
+                <a href="#" onClick={(e) => e.preventDefault()} className="bg-white text-primary px-8 py-3 rounded-lg font-semibold text-lg hover:bg-gray-200 transition-colors">
                     Add to Chrome
                 </a>
-                <a href="javascript:void(0);" className="bg-black/20 text-white px-8 py-3 rounded-lg font-semibold text-lg hover:bg-black/40 transition-colors">
+                <a href="#" onClick={(e) => e.preventDefault()} className="bg-black/20 text-white px-8 py-3 rounded-lg font-semibold text-lg hover:bg-black/40 transition-colors">
                     Add to Firefox
                 </a>
             </div>
@@ -380,8 +387,8 @@ const Footer = () => (
   <footer className="py-12 bg-[#111827] border-t border-glass-border">
     <div className="container mx-auto px-4 text-center text-gray-500">
       <div className="flex justify-center space-x-6 mb-6">
-        <a href="javascript:void(0);" className="hover:text-white">About</a>
-        <a href="javascript:void(0);" className="hover:text-white">Privacy Policy</a>
+        <button type="button" className="bg-transparent border-none text-gray-500 hover:text-white cursor-pointer">About</button>
+        <button type="button" className="bg-transparent border-none text-gray-500 hover:text-white cursor-pointer">Privacy Policy</button>
         <a href="mailto:contact@easyleaf.com" className="hover:text-white">Contact</a>
         <a href="https://github.com/rohithvijayan" className="hover:text-white flex items-center space-x-1">
             <Github size={16} />
