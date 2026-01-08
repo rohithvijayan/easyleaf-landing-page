@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import heroMockup from './hero-UIMOCKUP.png';
+import heroVideo from './hero.mp4';
 import begginer from './beginer.png';
 import error from './error.png';
 import safe from './safe.png';
@@ -12,13 +13,16 @@ import {
   AlertTriangle,
   CheckCircle,
   Github,
+  Linkedin,
   ToggleRight,
   XCircle,
   Leaf,
   BookOpen,
   Briefcase,
   Users,
-  Code2
+  Code2,
+  Volume2,
+  VolumeX
 } from 'lucide-react';
 
 const App = () => {
@@ -48,39 +52,90 @@ const Header = () => (
         <Leaf className="text-primary" size={28} />
         <span className="text-2xl font-bold text-white">EasyLeaf</span>
       </div>
-      <a href="#final-cta" className="bg-primary text-white px-6 py-2 rounded-lg font-semibold hover:bg-primary/90 transition-colors shadow-glow-indigo">
-        Get It Now !
-      </a>
+      <div className="flex items-center space-x-4">
+        <a href="https://github.com/rohithvijayan" target="_blank" rel="noopener noreferrer" className="text-white hover:text-primary transition-colors" aria-label="GitHub Profile">
+          <Github size={24} />
+        </a>
+        <a href="https://www.linkedin.com/in/rohithvijayan/" target="_blank" rel="noopener noreferrer" className="text-white hover:text-primary transition-colors" aria-label="LinkedIn Profile">
+          <Linkedin size={24} />
+        </a>
+        <a href="#final-cta" className="bg-primary text-white px-6 py-2 rounded-lg font-semibold hover:bg-primary/90 transition-colors shadow-glow-indigo">
+          Get It Now !
+        </a>
+      </div>
     </div>
   </header>
 );
 
-const Hero = () => (
-  <section className="py-20 md:py-32">
-    <div className="container mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
-      <div className="text-center md:text-left">
-        <h1 className="text-5xl md:text-6xl font-bold text-white leading-tight">
-          STOP Breaking<br />
-          Your Overleaf Document.
-        </h1>
-        <p className="mt-6 text-lg text-gray-400 max-w-xl mx-auto md:mx-0">
-          EasyLeaf adds a Beginner Mode to Overleaf — so you can build resumes and papers without breaking LaTeX.
-        </p>
-        <div className="mt-8 flex justify-center md:justify-start space-x-4">
-          <a href="#" className="bg-primary text-white px-8 py-3 rounded-lg font-semibold text-lg hover:bg-primary/90 transition-colors shadow-glow-indigo">
-            Add To Your Browser
-          </a>
-          <a href="#how-it-works" className="bg-transparent border-2 border-gray-600 text-white px-8 py-3 rounded-lg font-semibold text-lg hover:bg-gray-800 transition-colors">
-            See How It Works
-          </a>
+const Hero = () => {
+  const [isMuted, setIsMuted] = useState(true);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [cta, setCta] = useState({
+    text: 'Add To Your Browser',
+    href: '#',
+  });
+
+  useEffect(() => {
+    const userAgent = navigator.userAgent;
+    if (userAgent.indexOf("Firefox") > -1) {
+      setCta({ text: 'Add to Firefox', href: '#' }); // Replace # with Firefox extension link
+    } else if (userAgent.indexOf("Chrome") > -1) {
+      setCta({ text: 'Add to Chrome', href: '#' }); // Replace # with Chrome extension link
+    }
+  }, []);
+
+  const toggleMute = () => {
+    if (videoRef.current) {
+      videoRef.current.muted = !videoRef.current.muted;
+      setIsMuted(!isMuted);
+    }
+  };
+
+  return (
+    <section className="py-20 md:py-32">
+      <div className="container mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
+        <div className="text-center md:text-left">
+          <h1 className="text-5xl md:text-6xl font-bold text-white leading-tight">
+            STOP Breaking<br />
+            Your Overleaf Document.
+          </h1>
+          <p className="mt-6 text-lg text-gray-400 max-w-xl mx-auto md:mx-0">
+            EasyLeaf adds a Beginner Mode to Overleaf — so you can build resumes and papers without breaking LaTeX.
+          </p>
+          <div className="mt-8 flex justify-center md:justify-start space-x-4">
+            <a href={cta.href} className="bg-primary text-white px-8 py-3 rounded-lg font-semibold text-lg hover:bg-primary/90 transition-colors shadow-glow-indigo">
+              {cta.text}
+            </a>
+            <a href="#how-it-works" className="bg-transparent border-2 border-gray-600 text-white px-8 py-3 rounded-lg font-semibold text-lg hover:bg-gray-800 transition-colors">
+              See How It Works
+            </a>
+          </div>
+        </div>
+        <div className="relative">
+          <video
+            ref={videoRef}
+            className="rounded-2xl shadow-2xl border border-glass-border"
+            poster={heroMockup}
+            autoPlay
+            muted
+            loop
+            playsInline
+          >
+            <source src={heroVideo} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          <button
+            onClick={toggleMute}
+            className="absolute bottom-4 right-4 bg-black/50 text-white p-2 rounded-full hover:bg-black/75 transition-colors"
+            aria-label={isMuted ? "Unmute video" : "Mute video"}
+          >
+            {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
+          </button>
         </div>
       </div>
-      <div className="relative">
-        <img src={heroMockup} alt="EasyLeaf UI Mockup" className="rounded-2xl shadow-2xl border border-glass-border" />
-      </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 const SocialProof = () => (
     <div className="py-8 border-y border-glass-border">
@@ -325,10 +380,8 @@ const Footer = () => (
   <footer className="py-12 bg-[#111827] border-t border-glass-border">
     <div className="container mx-auto px-4 text-center text-gray-500">
       <div className="flex justify-center space-x-6 mb-6">
-        <a href="#" className="hover:text-white">About</a>
-        <a href="#" className="hover:text-white">Privacy Policy</a>
-        <a href="#" className="hover:text-white">Contact</a>
-        <a href="#" className="hover:text-white flex items-center space-x-1">
+        <a href="https://linkedin.com/in/rohithvijayan" className="hover:text-white">Contact</a>
+        <a href="https://github.com/rohithvijayan" className="hover:text-white flex items-center space-x-1">
             <Github size={16} />
             <span>GitHub</span>
         </a>
