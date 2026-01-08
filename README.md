@@ -2,7 +2,8 @@
 
 This is the official landing page for EasyLeaf, a browser extension that makes Overleaf beginner-friendly.
 
-![EasyLeaf Landing Page](./src/hero-UIMOCKUP.png)
+![EasyLeaf Landing Page](<img width="1920" height="921" alt="Screenshot from 2026-01-08 21-16-36" src="https://github.com/user-attachments/assets/667f367b-0947-48d8-a365-7eae4a3c84ff" />
+)
 
 ## ✨ Features
 
