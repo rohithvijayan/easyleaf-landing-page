@@ -72,7 +72,7 @@ const Hero = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [cta, setCta] = useState({
     text: 'Add To Your Browser',
-    href: '#', // Placeholder
+    href: '/#', // Placeholder
     disabled: true,
   });
 
@@ -80,9 +80,9 @@ const Hero = () => {
     const userAgent = navigator.userAgent;
     // NOTE: Add real extension links here
     if (userAgent.indexOf("Firefox") > -1) {
-      setCta({ text: 'Add to Firefox', href: '#', disabled: false });
+      setCta({ text: 'Add to Firefox', href: '/#', disabled: false });
     } else if (userAgent.indexOf("Chrome") > -1) {
-      setCta({ text: 'Add to Chrome', href: '#', disabled: false });
+      setCta({ text: 'Add to Chrome', href: '/#', disabled: false });
     }
   }, []);
 
@@ -238,12 +238,12 @@ const FinalCTA = () => (
                 Stop Fighting LaTeX. Start Writing.
             </h2>
             <div className="mt-8 flex justify-center space-x-4">
-                <a href="#" onClick={(e) => e.preventDefault()} className="bg-white text-primary px-8 py-3 rounded-lg font-semibold text-lg hover:bg-gray-200 transition-colors">
+                <button type="button" className="bg-white text-primary px-8 py-3 rounded-lg font-semibold text-lg hover:bg-gray-200 transition-colors">
                     Add to Chrome
-                </a>
-                <a href="#" onClick={(e) => e.preventDefault()} className="bg-black/20 text-white px-8 py-3 rounded-lg font-semibold text-lg hover:bg-black/40 transition-colors">
+                </button>
+                <button type="button" className="bg-black/20 text-white px-8 py-3 rounded-lg font-semibold text-lg hover:bg-black/40 transition-colors">
                     Add to Firefox
-                </a>
+                </button>
             </div>
             <p className="mt-6 text-indigo-200">
                 No signup. No data tracking. Works locally in your browser.

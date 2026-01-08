@@ -2,8 +2,7 @@
 
 This is the official landing page for EasyLeaf, a browser extension that makes Overleaf beginner-friendly.
 
-![EasyLeaf Landing Page](<img width="1920" height="921" alt="Screenshot from 2026-01-08 21-16-36" src="https://github.com/user-attachments/assets/667f367b-0947-48d8-a365-7eae4a3c84ff" />
-)
+![EasyLeaf Landing Page](./src/hero-UIMOCKUP.png)
 
 ## ✨ Features
 
@@ -11,6 +10,14 @@ This is the official landing page for EasyLeaf, a browser extension that makes O
 *   **Component-Based:** Developed with React, featuring a clean and modular component structure.
 *   **Clear & Concise Information:** The landing page effectively communicates the value proposition of the EasyLeaf extension.
 *   **Engaging Visuals:** Includes high-quality images and icons to create an engaging user experience.
+
+## 📸 Screenshots
+
+|                   |                   |
+| :-----------------------------------: | :-----------------------------------: |
+| <img src="public/uI1.png" width="400"> | <img src="public/UI2.png" width="400"> |
+| <img src="public/UI3.png" width="400"> | <img src="public/UI4.png" width="400"> |
+| <img src="public/UI5.png" width="400"> |                                       |
 
 ## 🚀 Technologies Used
 
