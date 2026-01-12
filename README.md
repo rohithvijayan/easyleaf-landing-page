@@ -15,7 +15,7 @@ This is the official landing page for EasyLeaf, a browser extension that makes O
 
 |                   |                   |
 | :-----------------------------------: | :-----------------------------------: |
-| <img src="public/uI1.png" width="400"> | <img src="public/UI2.png" width="400"> |
+| <img src="public/UI1.png" width="400"> | <img src="public/UI2.png" width="400"> |
 | <img src="public/UI3.png" width="400"> | <img src="public/UI4.png" width="400"> |
 | <img src="public/UI5.png" width="400"> |                                       |
 
